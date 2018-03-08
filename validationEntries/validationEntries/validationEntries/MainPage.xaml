@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:validationEntries"
+             xmlns:vl="clr-namespace:validationEntries.Validation"
+             xmlns:l="clr-namespace:validationEntries.Converters"
+             
+             x:Class="validationEntries.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <l:FirstErrorConverter x:Key="FirstErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Entry
+            Placeholder="Enter forename here"
+            Text="{Binding User.Forename, Mode=TwoWay}" 
+            vl:Validation.Errors="{Binding User.Errors[Forename]}" />
+       
+        <Label Grid.Row="1" Text="{Binding User.Errors[Forename],
+            Converter={StaticResource FirstErrorConverter}" 
+               FontSize="Small"
+               TextColor="Red" />
+        <Entry Grid.Row="2" 
+               Placeholder="Enter surname here" 
+               Text="{Binding User.Surname, Mode=TwoWay}"
+               vl:Validation.Errors="{Binding User.Errors[Surname]}" />
+        <Label
+            Grid.Row="3" 
+            Text="{Binding User.Errors[Surname],
+            Converter={StaticResource FirstErrorConverter}"
+            FontSize="Small" TextColor="Red" />
+        <Entry Grid.Row="4" 
+               Placeholder="Enter Email" 
+               Text="{Binding User.Email, Mode=TwoWay}"
+               vl:Validation.Errors="{Binding User.Errors[Email]}" />
+        <Label
+            Grid.Row="5" 
+            Text="{Binding User.Errors[Email],
+            Converter={StaticResource FirstErrorConverter}"
+            FontSize="Small" TextColor="Red" />
+        <Button 
+            Grid.Row="6" 
+            Text="Navigate" 
+            Command="{Binding commandd}"
+            HorizontalOptions="Center" />
+    </Grid>
+
+</ContentPage>
